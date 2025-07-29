@@ -164,21 +164,14 @@ const onSubmit = async (data) => {
               <div className="social-links">
                 <h4>Follow Us</h4>
                 <div className="social-icons">
-                  <a href="#" aria-label="Facebook">
-                    Facebook
-                  </a>{" "}
-                  |{" "}
-                  <a href="#" aria-label="Twitter">
-                    Twitter
-                  </a>{" "}
-                  |{" "}
-                  <a href="#" aria-label="Instagram">
-                    Instagram
-                  </a>
+                  <a href="https://facebook.com" aria-label="Facebook">Facebook</a> |{" "}
+  <a href="https://twitter.com" aria-label="Twitter">Twitter</a> |{" "}
+  <a href="https://instagram.com" aria-label="Instagram">Instagram</a>
                 </div>
                 <div className="contact-map">
                   <h4>Our Location</h4>
                   <iframe
+                  title="Our office location on map"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509376!2d144.9537353153168!3d-37.81627977975181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf0727e5a7b5d4f0!2s123%20News%20Street%2C%20Media%20City%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1634567890123!5m2!1sen!2sus"
                     width="100%"
                     height="300"
@@ -198,23 +191,18 @@ const onSubmit = async (data) => {
         <div className="footer-content">
           <p>© 2025 Trendy News. All rights reserved.</p>
           <div className="footer-links">
-            <a href="/about-us">About Us</a> |{" "}
-            <a href="/contact-us">Contact Us</a> |{" "}
-            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-          </div>
+  <a href="/about-us">About Us</a> |{" "}
+  <a href="/contact-us">Contact Us</a> |{" "}
+  <a href="/privacy-policy">Privacy Policy</a> |{" "}
+  <a href="/terms-of-service">Terms of Service</a>
+</div>
+
           <div className="footer-social">
-            <a href="#" aria-label="Facebook">
-              Facebook
-            </a>{" "}
-            |{" "}
-            <a href="#" aria-label="Twitter">
-              Twitter
-            </a>{" "}
-            |{" "}
-            <a href="#" aria-label="Instagram">
-              Instagram
-            </a>
-          </div>
+  <a href="https://facebook.com" aria-label="Facebook">Facebook</a> |{" "}
+  <a href="https://twitter.com" aria-label="Twitter">Twitter</a> |{" "}
+  <a href="https://instagram.com" aria-label="Instagram">Instagram</a>
+</div>
+
         </div>
       </footer>
     </div>

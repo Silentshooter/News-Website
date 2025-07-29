@@ -1,5 +1,5 @@
 // src/Components/Newsapp.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import Card from './Card';
 import AboutUs from './AboutUs';
@@ -11,40 +11,41 @@ const Newsapp = () => {
   const [newsData, setNewsData] = useState([]);
   const [isInitialLoading, setIsInitialLoading] = useState(true); // For initial app load
   const [isLoading, setIsLoading] = useState(false); // For subsequent fetches
-  const API_KEY = "ec70314b21d7451c9714c1f0e8b684a4";
+  const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
-  const getData = async (category = search) => {
-    setIsLoading(true);
+
+  const getData = useCallback(async (category = search) => {
+  setIsLoading(true);
+  try {
+    const response = await fetch(
+      `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${category}&language=en`
+    );
+    const jsonData = await response.json();
+    setNewsData(jsonData.results || []);
+  } catch (error) {
+    console.error("Error fetching news:", error);
+  } finally {
+    setIsLoading(false);
+  }
+}, [search, API_KEY]);
+
+
+
+  useEffect(() => {
+  const fetchInitialData = async () => {
+    const minimumLoadingTime = new Promise((resolve) => setTimeout(resolve, 2000));
     try {
-      const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${category}&apiKey=${API_KEY}`
-      );
-      const jsonData = await response.json();
-      console.log(jsonData.articles);
-      setNewsData(jsonData.articles || []);
+      await Promise.all([getData(), minimumLoadingTime]);
     } catch (error) {
-      console.error("Error fetching news:", error);
+      console.error("Error during initial load:", error);
     } finally {
-      setIsLoading(false);
+      setIsInitialLoading(false);
     }
   };
 
-  useEffect(() => {
-    const fetchInitialData = async () => {
-      // Ensure the loading screen is visible for at least 2 seconds for a polished UX
-      const minimumLoadingTime = new Promise((resolve) => setTimeout(resolve, 2000));
+  fetchInitialData();
+}, [getData]); // ✅ Fix warning
 
-      try {
-        await Promise.all([getData(), minimumLoadingTime]); // Wait for both data fetch and minimum time
-      } catch (error) {
-        console.error("Error during initial load:", error);
-      } finally {
-        setIsInitialLoading(false); // Hide the initial loading screen
-      }
-    };
-
-    fetchInitialData();
-  }, []);
 
   const handleInput = (e) => {
     setSearch(e.target.value);
@@ -88,9 +89,10 @@ const Newsapp = () => {
               <nav className="nav-menu">
                 <ul>
                   <li><Link to="/">Home</Link></li>
-                  <li><a href="#" onClick={() => handleCategoryClick("world")}>World News</a></li>
-                  <li><a href="#" onClick={() => handleCategoryClick("business")}>Business</a></li>
-                  <li><a href="#" onClick={() => handleCategoryClick("technology")}>Technology</a></li>
+                  <li><Link onClick={() => handleCategoryClick("world")}>World News</Link></li>
+<li><Link onClick={() => handleCategoryClick("business")}>Business</Link></li>
+<li><Link onClick={() => handleCategoryClick("technology")}>Technology</Link></li>
+
                   <li><Link to="/about-us">About Us</Link></li>
                   <li><Link to="/contact-us">Contact Us</Link></li>
                 </ul>
@@ -123,12 +125,16 @@ const Newsapp = () => {
               <div className="footer-content">
                 <p>© 2025 Trendy News. All rights reserved.</p>
                 <div className="footer-links">
-                  <Link to="/about-us">About Us</Link> | <Link to="/contact-us">Contact Us</Link> |{' '}
-                  <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-                </div>
+  <Link to="/about-us">About Us</Link> | <Link to="/contact-us">Contact Us</Link> |{' '}
+  <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a>
+</div>
+
                 <div className="footer-social">
-                  <a href="#" aria-label="Facebook">Facebook</a> | <a href="#" aria-label="Twitter">Twitter</a> | <a href="#" aria-label="Instagram">Instagram</a>
-                </div>
+  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a> | 
+  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a> | 
+  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+</div>
+
               </div>
             </footer>
           </div>

@@ -84,14 +84,15 @@ const AboutUs = () => {
         <div className="footer-content">
           <p>© 2025 Trendy News. All rights reserved.</p>
           <div className="footer-links">
-            <a href="/about-us">About Us</a> | <a href="/contact-us">Contact Us</a> |{' '}
-            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-          </div>
-          <div className="footer-social">
-            <a href="#" aria-label="Facebook">Facebook</a> |{' '}
-            <a href="#" aria-label="Twitter">Twitter</a> |{' '}
-            <a href="#" aria-label="Instagram">Instagram</a>
-          </div>
+  <a href="/about-us">About Us</a> | <a href="/contact-us">Contact Us</a> |{' '}
+  <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a>
+</div>
+<div className="footer-social">
+  <a href="https://facebook.com" aria-label="Facebook">Facebook</a> |{' '}
+  <a href="https://twitter.com" aria-label="Twitter">Twitter</a> |{' '}
+  <a href="https://instagram.com" aria-label="Instagram">Instagram</a>
+</div>
+
         </div>
       </footer>
     </div>
